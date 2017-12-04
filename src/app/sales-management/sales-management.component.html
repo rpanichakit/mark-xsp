@@ -1,0 +1,65 @@
+<div id="modal-mask" [hidden]="!deleting"></div>
+<div id="confirm-modal" [hidden]="!deleting">
+    <div>Are you sure you want to delete {{deleteName}}?</div>
+    <div style="margin-top: 15px;">
+        <button class="btn btn-primary" (click)="confirmDelete($event)">Yes</button>
+        <button class="btn btn-default" (click)="cancelDelete($event)">No</button>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Sales Person Management
+        <div class="heading-btn" (click)="addPerson($event)">
+            <i class="fa fa-plus" aria-hidden="true"></i> Add Person
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th (click)="sort('firstName')">
+                        Firstname
+                        <i class="fa fa-sort-asc" aria-hidden="true" [hidden]="sortBy !== 'firstName' || sortDirection !== 'asc'"></i>
+                        <i class="fa fa-sort-desc" aria-hidden="true" [hidden]="sortBy !== 'firstName' || sortDirection !== 'desc'"></i>
+                    </th>
+                    <th (click)="sort('lastName')">
+                        Lastname
+                        <i class="fa fa-sort-asc" aria-hidden="true" [hidden]="sortBy !== 'lastName' || sortDirection !== 'asc'"></i>
+                        <i class="fa fa-sort-desc" aria-hidden="true" [hidden]="sortBy !== 'lastName' || sortDirection !== 'desc'"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="edit-row" *ngFor="let person of editList" (click)="selectPerson(person, $event)">
+                    <td>
+                        <span [hidden]="person.editing">{{person.FirstName}}</span>
+                        <input [hidden]="!person.editing" type="text" [(ngModel)]="person.FirstName" name="firstName" (click)="onRowClick($event)" [ngClass]="{error:person.invalidFirstName}">
+                    </td>
+                    <td style="position:relative;">
+                        <span [hidden]="person.editing">{{person.LastName}}</span>
+                        <input [hidden]="!person.editing" type="text" [(ngModel)]="person.LastName" name="lastName" (click)="onRowClick($event)" [ngClass]="{error:person.invalidLastName}">
+                        <div class="edit-btn" (click)="editRow(person, $event)" [hidden]="(selectedPerson !== person) || person.editing">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </div>
+                        <div class="right-btn" (click)="deletePerson(person,$event)" [hidden]="(selectedPerson !== person) || person.editing">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </div>
+                        <div class="right-btn" (click)="updatePerson(person,$event)" [hidden]="!person.editing">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                        </div>
+                    </td>
+                </tr>
+                <tr [hidden]="!adding" (click)="onRowClick($event)">
+                    <td>
+                        <input type="text" #newFirstName name="newFirstName" [(ngModel)]="newSalesPerson.FirstName" (click)="onRowClick($event)" [ngClass]="{error:errors.invalidFirstName}" >
+                    </td>
+                    <td style="position:relative">
+                        <input type="text" name="newLastName" [(ngModel)]="newSalesPerson.LastName" (click)="onRowClick($event)"  [ngClass]="{error:errors.invalidLastName}" >
+                        <div class="right-btn" (click)="saveNewPerson($event)">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

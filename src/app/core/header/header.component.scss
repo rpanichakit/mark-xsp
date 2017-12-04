@@ -1,0 +1,50 @@
+.navbar {
+    min-height: 30px;
+    .navbar-right {
+        margin-right: 0;
+        .drop-down {
+            margin-right: 5px;
+        }
+        .dropdown-menu {
+            right: 5px;
+        }
+    }
+    .nav>li>a:hover {
+        background: #222222;
+    }
+    .nav .open>a,
+    .nav .open>a:focus,
+    .nav .open>a:hover {
+        background: #222222;
+    }
+
+    .dropdown-toggle {
+        color: #fff;
+    }
+
+    .dropdown-menu {
+        background: #333;
+        color: #fff;
+        .divider {
+            background: #454545;
+        }
+        li>a {
+            color: #fff;
+            cursor: pointer;
+
+            &:hover {
+                color: #262626;
+            }
+
+            &.disable {
+                color: #454545;
+                cursor: not-allowed;
+
+                &:hover {
+                    background: #333;
+                    color: #454545;
+                }
+            }
+        }
+    }
+}
