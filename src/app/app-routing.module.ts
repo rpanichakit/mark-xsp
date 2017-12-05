@@ -16,12 +16,11 @@ import { LoginGuard } from './core/login-guard.service';
                 children: [
                     {
                         path: 'sales-management', loadChildren: './sales-management/sales-management.module#SalesManagementModule'
+                    },
+                    {
+                        path: '**', redirectTo: 'sales-management'
                     }
                 ]
-            },
-            {
-                path: '**',
-                redirectTo: ''
             }
         ])
     ],

@@ -16,20 +16,20 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th (click)="sort('firstName')">
+                    <th (click)="sort('FirstName')">
                         Firstname
-                        <i class="fa fa-sort-asc" aria-hidden="true" [hidden]="sortBy !== 'firstName' || sortDirection !== 'asc'"></i>
-                        <i class="fa fa-sort-desc" aria-hidden="true" [hidden]="sortBy !== 'firstName' || sortDirection !== 'desc'"></i>
+                        <i class="fa fa-sort-asc" aria-hidden="true" [hidden]="sortBy !== 'FirstName' || sortDirection !== 'asc'"></i>
+                        <i class="fa fa-sort-desc" aria-hidden="true" [hidden]="sortBy !== 'FirstName' || sortDirection !== 'desc'"></i>
                     </th>
-                    <th (click)="sort('lastName')">
+                    <th (click)="sort('LastName')">
                         Lastname
-                        <i class="fa fa-sort-asc" aria-hidden="true" [hidden]="sortBy !== 'lastName' || sortDirection !== 'asc'"></i>
-                        <i class="fa fa-sort-desc" aria-hidden="true" [hidden]="sortBy !== 'lastName' || sortDirection !== 'desc'"></i>
+                        <i class="fa fa-sort-asc" aria-hidden="true" [hidden]="sortBy !== 'LastName' || sortDirection !== 'asc'"></i>
+                        <i class="fa fa-sort-desc" aria-hidden="true" [hidden]="sortBy !== 'LastName' || sortDirection !== 'desc'"></i>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="edit-row" *ngFor="let person of editList" (click)="selectPerson(person, $event)">
+                <tr class="edit-row" *ngFor="let person of editList" (click)="selectPerson(person, $event)" [ngClass]="{selected:selectedPerson === person}">
                     <td>
                         <span [hidden]="person.editing">{{person.FirstName}}</span>
                         <input [hidden]="!person.editing" type="text" [(ngModel)]="person.FirstName" name="firstName" (click)="onRowClick($event)" [ngClass]="{error:person.invalidFirstName}">
